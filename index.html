@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .center{text-align: center;display: flex;}
+        .PROFILE{
+            margin: auto;
+            text-align: center;
+            font-size: 30px;
+        }
+        .picture{
+            margin-left:60px;
+            
+        }
+         body{
+            background-size: cover ;
+            background-image: url(pattaya2.jpg);
+            }
+        .name{
+            float: middle;  
+            background-color: rgb(247, 204, 111);
+            color: rgb(0, 0, 0);
+            margin-top: 100px;margin-left: 100px;
+            margin: 10px;
+            padding: 50px;
+            width: 200px;
+            height: 400PX;
+            border-radius: 10%;
+            }
+        .info{
+            float: left; 
+            margin-top: -450px;
+            margin-left: 300px;
+            padding: 20px;
+            width: 600px;
+            height: 450px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5%;
+            }
+        .submit{
+            float: left;
+            margin-top: 50px;margin-left: 60px;
+            padding: 20px;
+            width: 180px;
+            height: 100px;
+            background-color: 
+            rgb(199, 194, 194);
+            border-radius: 5%;
+            }
+        .sensor{
+            clear: both;
+            float: right; 
+            margin-top:0px;
+            margin-right: 50px;
+            padding: 20px;
+            width: 380px;
+            height: 120px;
+            background-color: rgb(226, 161, 129);
+            font-size: 150%;
+            }
+        
+    </style>
+
+
+
+</head>
+
+
+<body>
+    <header class="PROFILE">
+        <h1><em>RESUME</em></h1> 
+    </header>
+
+    <div class="picture">
+        <a href="https://www.youtube.com/watch?v=nuCIA31LfIU"target="blank">
+            <img src="p1.jpg" alt="" 
+            width=200px height=250px  >
+    </div>
+    </a>
+
+    <div class="name">
+        <h1><em>Information</em></h1>
+        <p><h3><em>Name : Ittiphon 
+        </p>lastname : Hasitavase    
+        </p>Age : 23 years old
+        <p>Heigth : 165 cm
+        <p>Weight : 97 kg
+        </p>Blood : Group b
+        <p>Sex : Male
+        </p>Nationality : Thai
+        </p></h3></em>
+
+
+    <a class="info">
+     
+        <h2>My name is ake .I come form pattaya Chonburi Thailand.</h2>
+        <br><h2>hobby</h2>
+        <h3>Watch movie</h3> <h3>listen music</h3> <h3>play game</h3>
+        <br>
+        <br>
+        <br>
+        <br><h4>Phone: 0661125155</h4>
+        <h4>Contract: ittiphonhasitavase@gmail.com</h4>
+    </a>
+    </div>
+
+    
+
+    <div class="submit">
+        name
+        <input class="box-input-text" type="text" id="studentName">
+        <br>ID <br>
+        <input class="box-input-text" type="text" id="studentId">
+        <input class="api-post-box-sent-submit" type="submit" >
+        
+        <script>
+            async function submitData() {
+                const studentId = document.getElementById("studentId").value;
+                const studentName = document.getElementById("studentName").value;
+                const data = {
+                    id: studentId,
+                    name: studentName
+                };
+                try {
+                    const response = await fetch("https://206.189.146.138/api/students", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    });
+        
+                    if (response.ok) {
+                        alert("Sendsuccess!");
+                    } else {
+                        alert("Send fail.");
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("Send fail.");
+                }
+            }
+          </script>   
+    </div>
+    <div class="sensor">
+        <script>
+         document.addEventListener('DOMContentLoaded',function (){
+        setInterval(() => {
+            fetch('https://206.189.146.138/api/sensors') 
+            .then(response => response.json()) 
+            .then(data => {
+                const timestamp = data.timestamp;
+                const temperature = data.temperature;
+                const humidity = data.humidity;
+                const luxsensor = data.luxsensor;
+                const motion = data.motion;
+                document.querySelector('.sensor').innerHTML = `
+                timestamp ${timestamp}
+                <br>temperature ${temperature} 
+                <br>humidity ${humidity} 
+                <br>luxsensor ${luxsensor} 
+                <br>motion ${motion} `; 
+                })
+            }, 1000); 
+        })  
+        </script>
+    </div>
+    
+</body>
+</html>
